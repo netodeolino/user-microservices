@@ -1,0 +1,12 @@
+.home-view {
+    margin: 5rem;
+}
+
+.a-edit {
+    color: blue;
+}
+
+.a-delete {
+    margin-left: .5rem;
+    color: red;
+}

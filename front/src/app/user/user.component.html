@@ -1,0 +1,56 @@
+<div class="user-view">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <div class="card">
+                <h1 class="card-header" *ngIf="isAddMode">Add User</h1>
+                <h1 class="card-header" *ngIf="!isAddMode">Edit User</h1>
+                <div class="card-body">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label for="name">Name</label>
+                                <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required">Name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label for="login">Login</label>
+                                <input type="text" formControlName="login" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
+                                <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+                                    <div *ngIf="f.login.errors.required">Login is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label for="email">Email</label>
+                                <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label for="password">
+                                    Password
+                                    <em *ngIf="!isAddMode">(Leave blank to keep the same password)</em>
+                                </label>
+                                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required">Password is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button [disabled]="loading" class="btn btn-primary">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Save
+                            </button>
+                            <a routerLink="/" class="btn btn-link">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

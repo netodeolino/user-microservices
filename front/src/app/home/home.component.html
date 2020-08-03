@@ -1,0 +1,37 @@
+<div class="home-view">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Login</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Updated</th>
+                    <th scope="col">Admin</th>
+                    <th scope="col" class="text-center">Options</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of users">
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.login }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.createdDate | date:'dd/MM/yyyy' }}</td>
+                    <td>{{ user.updatedDate | date:'dd/MM/yyyy' }}</td>
+                    <td>{{ user.admin }}</td>
+                    <td class="text-center">
+                      <a class="a-edit pointer" title="Edit" routerLink="/user/{{user.id}}">
+                        <i class="fa fa-user-edit"></i>
+                      </a>
+                      <a class="a-delete pointer" title="Delete" (click)="deleteUser(user)">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
