@@ -5,6 +5,7 @@ import com.br.auth.model.dto.JwtRequest;
 import com.br.auth.model.dto.JwtResponse;
 import com.br.auth.model.entity.User;
 import com.br.auth.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("user")
+@Api(tags = "UserController")
 public class UserControllerImpl implements UserController {
     @Autowired
     private UserService userService;
