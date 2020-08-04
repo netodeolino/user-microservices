@@ -5,5 +5,5 @@ import io.swagger.annotations.ApiOperation;
 
 public interface EmailController {
     @ApiOperation(value = "Send email")
-    void sendEmail(EmailRequest email);
+    void sendEmail(EmailRequest emailRequest);
 }

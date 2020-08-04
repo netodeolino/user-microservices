@@ -15,7 +15,6 @@ import java.util.Date;
 public class User {
     @Id
     @Getter
-    @Setter
     private String id;
 
     @Getter

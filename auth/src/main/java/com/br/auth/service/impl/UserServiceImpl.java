@@ -109,6 +109,13 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.save(userSaved);
     }
 
+    @Override
+    public User findByEmail(String email) {
+        return this.userRepository
+                .findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("User not found!"));
+    }
+
     private Boolean isUserLoggedAdmin() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth.getAuthorities().contains("true");
