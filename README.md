@@ -13,3 +13,7 @@ Dentro da pasta do projeto executar os comandos:
 
 ## Dependências
 Os serviços `rabbit` e `auth` precisam do Redis e do RabbitMQ rodando localhost nas portas default de cada um (pode ser um container docker)
+
+<p align="center">
+  <img height="411" src="https://raw.githubusercontent.com/netodeolino/user-microservices/master/imgs/diagram.png">
+</p>
