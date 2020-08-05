@@ -37,9 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String login) {
-        User user = this.userRepository
-                .findByLogin(login)
-                .orElseThrow(() -> new BadRequestException("User not found with login: " + login));
+        User user = this.findByLogin(login);
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getAdmin().toString()));
@@ -110,10 +108,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByEmail(String email) {
+    public User findByLogin(String login) {
         return this.userRepository
-                .findByEmail(email)
-                .orElseThrow(() -> new NotFoundException("User not found!"));
+                .findByLogin(login)
+                .orElseThrow(() -> new BadRequestException("User not found with login: " + login));
     }
 
     private Boolean isUserLoggedAdmin() {

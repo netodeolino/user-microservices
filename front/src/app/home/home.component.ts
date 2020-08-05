@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
     this.apiService.get('/user').subscribe(res => {
       this.users = res;
     }, error => {
+      // posso usar um handler, mas por questão de tempo vou deixar assim!
       console.error(error);
     });
   }

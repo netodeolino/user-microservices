@@ -18,7 +18,7 @@ public class UserControllerImpl implements UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody JwtRequest jwtRequest) {
         JwtResponse jwtResponse = this.userService.authenticate(jwtRequest);
         return jwtResponse != null ? ResponseEntity.ok(jwtResponse) : ResponseEntity.badRequest().build();
@@ -40,12 +40,12 @@ public class UserControllerImpl implements UserController {
         this.userService.delete(id);
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody User user) {
         return ResponseEntity.ok(this.userService.save(user));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable String id, @RequestBody User user) {
         return ResponseEntity.ok(this.userService.update(id, user));
     }

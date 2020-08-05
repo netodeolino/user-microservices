@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     const password: string = this.f.password.value;
 
     this.loading = true;
-    this.apiService.post('/user/authenticate', { login, password })
+    this.apiService.post('/user/login', { login, password })
       .subscribe(res => {
         this.loading = false;
         this.utilService.setToken(res.jwttoken);

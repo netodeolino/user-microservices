@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EmailRequest {
     private String message;
-    private String email;
+    private String login;
 }

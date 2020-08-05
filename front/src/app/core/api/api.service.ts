@@ -17,11 +17,6 @@ export class ApiService {
   }
 
   public post(url: string, body?: { [index: string]: any }): Observable<any> {
-    let headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Authorization', this.utilService.getToken());
-
-    body.headers = headers;
-
     return this.http.post(`${this.API_URL}${url}`, body).pipe(map(response => response));
   }
 

@@ -62,7 +62,9 @@ export class UserComponent implements OnInit {
   }
 
   private createUser() {
-    this.apiService.post('/user', this.form.value).subscribe(() => {
+    const { name, login, email, password } = this.form.value;
+
+    this.apiService.post('/user/save', { name, login, email, password }).subscribe(() => {
       this.loading = false;
       this.router.navigate(['']);
     }, error => {
@@ -72,7 +74,7 @@ export class UserComponent implements OnInit {
   }
 
   private updateUser() {
-    this.apiService.put(`/user/${this.userId}`, this.form.value).subscribe(() => {
+    this.apiService.put(`/user/update/${this.userId}`, this.form.value).subscribe(() => {
       this.loading = false;
       this.router.navigate(['']);
     }, error => {

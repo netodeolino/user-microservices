@@ -30,16 +30,6 @@ public class AuthApplication implements CommandLineRunner {
 //		user.setName("Neto");
 //		user.setPassword("$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6");
 //
-//		User user2 = new User();
-//		user2.setAdmin(false);
-//		user2.setUpdatedDate(new Date());
-//		user2.setCreatedDate(new Date());
-//		user2.setEmail("fernanda@email.com");
-//		user2.setLogin("fernanda");
-//		user2.setName("Fernanda");
-//		user2.setPassword("$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6");
-//
 //		this.userRepository.save(user);
-//		this.userRepository.save(user2);
 	}
 }

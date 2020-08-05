@@ -28,17 +28,7 @@ public class EmailControllerImpl implements EmailController {
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void sendEmail(@RequestBody EmailRequest emailRequest) {
-//        User user = this.userService.findByEmail(emailRequest.getEmail());
-//        this.rabbitTemplate.set
-
-        User user = new User();
-		user.setAdmin(true);
-		user.setUpdatedDate(new Date());
-		user.setCreatedDate(new Date());
-		user.setEmail("neto@email.com");
-		user.setLogin("neto");
-		user.setName("Neto");
-		user.setPassword("$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6");
+        User user = this.userService.findByLogin(emailRequest.getLogin());
 
         EmailDTO emailDTO = new EmailDTO(emailRequest.getMessage(), user);
         String json = JsonUtil.mapToJson(emailDTO);
