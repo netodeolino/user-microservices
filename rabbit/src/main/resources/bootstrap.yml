@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: rabbit
-  cloud:
-    config:
-      uri: http://localhost:8888

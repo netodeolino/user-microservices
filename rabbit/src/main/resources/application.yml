@@ -1,6 +1,13 @@
 server:
   port: 8081
 
+spring:
+  application:
+    name: rabbit
+  # cloud:
+  #   config:
+  #     uri: http://localhost:8888
+
 eureka:
   instance:
     preferIpAddress: true

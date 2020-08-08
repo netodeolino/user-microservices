@@ -5,9 +5,14 @@ jwt:
   secret: usersecret
 
 spring:
+  application:
+    name: auth
   redis:
     host: localhost
     port: 6379
+  # cloud:
+  #   config:
+  #     uri: http://localhost:8888
 
 eureka:
   instance:
