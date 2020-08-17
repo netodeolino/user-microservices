@@ -10,6 +10,7 @@ import com.br.auth.service.UserService;
 import com.br.auth.util.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,9 +18,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -35,16 +37,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String login) {
         User user = this.findByLogin(login);
 
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getAdmin().toString()));
+        List<GrantedAuthority> authorities =
+                Arrays.asList(new SimpleGrantedAuthority(user.getAdmin().toString()));
 
         return new org.springframework.security.core.userdetails.User(
                 login,
-                "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6",
+                user.getPassword(),
                 authorities);
     }
 
@@ -57,7 +62,8 @@ public class UserServiceImpl implements UserService {
             final UserDetails userDetails = this.loadUserByUsername(login);
             final String token = this.jwtTokenUtil.generateToken(userDetails);
 
-            this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, password));
+            this.authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(login, password));
 
             return new JwtResponse(token);
         } catch (Exception e) {
@@ -67,6 +73,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable("user")
     public List<User> findAll() {
         return (List<User>) this.userRepository.findAll();
     }
@@ -88,6 +95,9 @@ public class UserServiceImpl implements UserService {
         user.setAdmin(false);
         user.setCreatedDate(new Date());
         user.setUpdatedDate(new Date());
+
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+
         return this.userRepository.save(user);
     }
 
